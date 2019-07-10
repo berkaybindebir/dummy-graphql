@@ -24,19 +24,10 @@ const schema = buildSchema(`
   }
 `);
 
-// Resolvers
-var getUser = function(args) {
-	return Users.find(user => data.id === args.id);
-};
-
-var getUsers = function() {
-	return Users;
-};
-
 // Root Resolver
 const rootValue = {
-	user: getUser,
-	users: getUsers
+	user: args => Users.find(user => user.id === args.id),
+	users: () => Users
 };
 
 const app = express();
